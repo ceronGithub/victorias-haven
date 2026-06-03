@@ -11,6 +11,10 @@ import Hero          from './components/Hero';
 import BookingWidget from './components/BookingWidget';
 import WhyChooseUs   from './components/WhyChooseUs';
 import RoomShowcase  from './components/RoomShowcase';
+import Services      from './components/Services';
+import Amenities     from './components/Amenities';
+import Testimonials  from './components/Testimonials';
+import Gallery       from './components/Gallery';
 
 import './styles/main.css';
 import './styles/mediaQueries.css';
@@ -28,6 +32,10 @@ export default function App() {
         <BookingWidget />
         <WhyChooseUs />
         <RoomShowcase />
+        <Services />
+        <Amenities />
+        <Testimonials />
+        <Gallery />
       </main>
     </>
   );

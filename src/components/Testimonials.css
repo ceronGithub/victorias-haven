@@ -1,0 +1,221 @@
+/* ============================================================
+   Testimonials.css — Section 8: Guest Reviews Carousel
+   ============================================================ */
+
+.testimonialsSection {
+  position: relative;
+  background: var(--color-navy);
+  padding: var(--section-pad) 2.5rem;
+  overflow: hidden;
+}
+
+/* Ambient glow */
+.testimonialsSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(212,165,116,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 0% 0%, rgba(123,168,168,0.05) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.testimonialsSectionInner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* ── Section Header ── */
+.testimonialsSectionHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.testimonialsSectionHeader .sectionTitle {
+  color: var(--color-cream);
+}
+
+.testimonialsSectionHeader .sectionSubtitle {
+  color: rgba(245,241,232,0.55);
+}
+
+/* ── Carousel Track ── */
+.testimonialsTrack {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  margin-bottom: 3rem;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.testimonialsTrackTransitioning {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+/* ── Testimonial Card ── */
+.testimonialCard {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  padding: 2.25rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  transition: border-color var(--transition-base), background var(--transition-base), transform var(--transition-slow);
+  will-change: transform;
+}
+
+.testimonialCard:hover {
+  border-color: rgba(212,165,116,0.25);
+  background: rgba(255,255,255,0.06);
+  transform: translateY(-4px);
+}
+
+/* ── Quote Mark ── */
+.testimonialQuoteMark {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  line-height: 0.8;
+  color: var(--color-gold);
+  opacity: 0.35;
+  user-select: none;
+}
+
+/* ── Stars ── */
+.testimonialStars {
+  display: flex;
+  gap: 3px;
+}
+
+.testimonialStar {
+  font-size: 0.85rem;
+  color: var(--color-gold);
+}
+
+/* ── Quote Text ── */
+.testimonialQuote {
+  font-family: var(--font-display);
+  font-size: 0.975rem;
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(245,241,232,0.80);
+  line-height: 1.8;
+  flex: 1;
+  quotes: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ── Guest Footer ── */
+.testimonialGuest {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  margin-top: auto;
+}
+
+/* Avatar */
+.testimonialAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--avatarAccent, var(--color-gold));
+  opacity: 0.9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-navy-deep);
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+
+.testimonialGuestInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.testimonialGuestName {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-cream);
+  letter-spacing: 0.01em;
+}
+
+.testimonialGuestMeta {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  color: rgba(245,241,232,0.40);
+  letter-spacing: 0.04em;
+}
+
+/* ── Controls ── */
+.testimonialsControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* Nav buttons */
+.testimonialsNavBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(245,241,232,0.18);
+  background: rgba(255,255,255,0.04);
+  color: rgba(245,241,232,0.60);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color var(--transition-base), background var(--transition-base), color var(--transition-base), transform var(--transition-base);
+  will-change: transform;
+}
+
+.testimonialsNavBtn:hover {
+  border-color: var(--color-gold);
+  background: rgba(212,165,116,0.10);
+  color: var(--color-gold);
+  transform: scale(1.08);
+}
+
+/* Dots */
+.testimonialsDots {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.testimonialsDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(245,241,232,0.20);
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition-base), transform var(--transition-base), width var(--transition-base);
+  will-change: transform;
+}
+
+.testimonialsDot:hover {
+  background: rgba(245,241,232,0.45);
+}
+
+.testimonialsDotActive {
+  background: var(--color-gold);
+  width: 24px;
+  border-radius: 4px;
+}

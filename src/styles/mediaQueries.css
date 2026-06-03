@@ -152,3 +152,101 @@
     max-width: 100%;
   }
 }
+
+/* ── SERVICES ────────────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .servicesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .servicesSection {
+    padding: var(--section-pad) 1.25rem;
+  }
+
+  .servicesTabs {
+    gap: 0;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 0;
+    scrollbar-width: none;
+  }
+
+  .servicesTabs::-webkit-scrollbar { display: none; }
+
+  .servicesTab { flex-shrink: 0; }
+}
+
+@media (max-width: 640px) {
+  .servicesGrid { grid-template-columns: 1fr; }
+}
+
+/* ── AMENITIES ───────────────────────────────────────────── */
+@media (max-width: 1200px) {
+  .amenitiesGrid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 1024px) {
+  .amenitiesGrid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .amenitiesSection { padding: var(--section-pad) 1.25rem; }
+  .amenitiesGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .amenitiesGrid { gap: 0.875rem; }
+  .amenityCard { padding: 1.25rem 1rem; }
+}
+
+/* ── TESTIMONIALS ────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .testimonialsTrack { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .testimonialsSection { padding: var(--section-pad) 1.25rem; }
+  .testimonialsTrack {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin-inline: auto;
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* ── GALLERY ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .galleryGrid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .gallerySection { padding: var(--section-pad) 1.25rem; }
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 180px;
+  }
+  .galleryItem--wide { grid-column: span 1; }
+  .galleryCategoryTabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    scrollbar-width: none;
+    gap: 0.375rem;
+  }
+  .galleryCategoryTabs::-webkit-scrollbar { display: none; }
+  .galleryCategoryTab { flex-shrink: 0; }
+  .lightboxNavPrev { left: 0.75rem; }
+  .lightboxNavNext { right: 0.75rem; }
+}
+
+@media (max-width: 480px) {
+  .galleryGrid {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 150px;
+  }
+  .galleryItem--tall { grid-row: span 1; }
+}
