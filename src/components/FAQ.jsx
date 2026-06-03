@@ -56,7 +56,7 @@ const faqItems = [
     id: 'payment',
     question: 'What payment methods do you accept?',
     answer:
-      'We accept bank transfers and cash in Philippine Peso. Payment details will be provided upon confirmation of your booking. A reservation deposit may be required to secure your dates.',
+      'We accept bank transfer via BDO (Banco de Oro). Payment details will be provided upon confirmation of your booking. A reservation deposit may be required to secure your dates.',
   },
 ];
 

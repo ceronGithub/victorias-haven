@@ -45,7 +45,7 @@
 /* ── Grid ── */
 .roomsGrid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.75rem;
 }
 
@@ -68,7 +68,7 @@
 /* ── Image ── */
 .roomCardImageWrap {
   position: relative;
-  height: 220px;
+  height: 320px;
   overflow: hidden;
 }
 

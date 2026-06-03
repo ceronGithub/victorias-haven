@@ -8,6 +8,7 @@
  */
 
 import { useState } from 'react';
+import { sendContactEmail } from '../lib/emailjs';
 import './Contact.css';
 
 /* ── Rule 18.1 — Forbidden character sanitizer ── */
@@ -114,8 +115,8 @@ export default function Contact() {
     return newErrors;
   };
 
-  /* Handle form submit — mock submission */
-  const handleSubmit = (e) => {
+  /* Handle form submit — sends via EmailJS */
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
@@ -123,12 +124,15 @@ export default function Contact() {
       return;
     }
     setIsSubmitting(true);
-    /* Simulate async submit */
-    setTimeout(() => {
-      setIsSubmitting(false);
+    try {
+      await sendContactEmail(formData);
       setIsSubmitted(true);
       setFormData(INITIAL_FORM_STATE);
-    }, 1200);
+    } catch {
+      setErrors({ message: 'Something went wrong. Please try again or contact us directly.' });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
