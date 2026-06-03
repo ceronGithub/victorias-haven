@@ -28,18 +28,6 @@ const inquiryTypes = [
 
 const socialLinks = [
   {
-    id: 'instagram',
-    label: 'Instagram',
-    href: 'https://instagram.com/victoriashaven',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="20" height="20">
-        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="1.6"/>
-        <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6"/>
-        <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
-      </svg>
-    ),
-  },
-  {
     id: 'facebook',
     label: 'Facebook',
     href: 'https://facebook.com/victoriashaven',
@@ -50,25 +38,24 @@ const socialLinks = [
     ),
   },
   {
-    id: 'twitter',
-    label: 'Twitter / X',
-    href: 'https://twitter.com/victoriashaven',
+    id: 'tiktok',
+    label: 'TikTok',
+    href: 'https://tiktok.com/@victoriashaven',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="20" height="20">
-        <path d="M4 4l16 16M4 20L20 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
-        <path d="M20 4H14l-4 6M4 20h6l4-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M9 12a4 4 0 104 4V4a5 5 0 005 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
   },
   {
-    id: 'linkedin',
-    label: 'LinkedIn',
-    href: 'https://linkedin.com/company/victoriashaven',
+    id: 'instagram',
+    label: 'Instagram',
+    href: 'https://instagram.com/victoriashaven',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="20" height="20">
-        <rect x="2" y="2" width="20" height="20" rx="4" stroke="currentColor" strokeWidth="1.6"/>
-        <path d="M7 10v7M7 7v.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M11 17v-4a2 2 0 014 0v4M11 10v7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="1.6"/>
+        <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6"/>
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
       </svg>
     ),
   },
@@ -334,8 +321,8 @@ export default function Contact() {
                 </div>
                 <div className="contactInfoItemDetails">
                   <span className="contactInfoItemLabel">Email</span>
-                  <a href="mailto:hello@victoriashaven.com" className="contactInfoItemValue">
-                    hello@victoriashaven.com
+                  <a href="mailto:official.victoriashaven@gmail.com" className="contactInfoItemValue">
+                    official.victoriashaven@gmail.com
                   </a>
                 </div>
               </li>
@@ -348,8 +335,11 @@ export default function Contact() {
                 </div>
                 <div className="contactInfoItemDetails">
                   <span className="contactInfoItemLabel">Phone</span>
-                  <a href="tel:+63291234567" className="contactInfoItemValue">
-                    +63 (2) 9123 4567
+                  <a href="tel:+639178576858" className="contactInfoItemValue">
+                    0917 857 6858
+                  </a>
+                  <a href="tel:+639471293981" className="contactInfoItemValue">
+                    0947 129 3981
                   </a>
                 </div>
               </li>
