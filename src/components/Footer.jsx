@@ -12,7 +12,7 @@ import { useState } from 'react';
 import './Footer.css';
 
 /* ── Rule 18.1 — Forbidden character sanitizer ── */
-const FORBIDDEN_CHARS = /[<>{}[\]/\\;'"` =\-\-]/g;
+const FORBIDDEN_CHARS = /[<>{}[\]/\\;'"=\-\-]/g;
 function sanitizeInput(value) {
   return value.replace(FORBIDDEN_CHARS, '');
 }
@@ -44,18 +44,6 @@ const legalLinks = [
 
 const socialLinks = [
   {
-    id: 'instagram',
-    label: 'Instagram',
-    href: 'https://instagram.com/victoriashaven',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18" aria-hidden="true">
-        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="1.6"/>
-        <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6"/>
-        <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
-      </svg>
-    ),
-  },
-  {
     id: 'facebook',
     label: 'Facebook',
     href: 'https://facebook.com/victoriashaven',
@@ -66,25 +54,24 @@ const socialLinks = [
     ),
   },
   {
-    id: 'twitter',
-    label: 'Twitter / X',
-    href: 'https://twitter.com/victoriashaven',
+    id: 'tiktok',
+    label: 'TikTok',
+    href: 'https://tiktok.com/@victoriashaven',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18" aria-hidden="true">
-        <path d="M4 4l16 16M4 20L20 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
-        <path d="M20 4H14l-4 6M4 20h6l4-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M9 12a4 4 0 104 4V4a5 5 0 005 5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
   },
   {
-    id: 'linkedin',
-    label: 'LinkedIn',
-    href: 'https://linkedin.com/company/victoriashaven',
+    id: 'instagram',
+    label: 'Instagram',
+    href: 'https://instagram.com/victoriashaven',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18" aria-hidden="true">
-        <rect x="2" y="2" width="20" height="20" rx="4" stroke="currentColor" strokeWidth="1.6"/>
-        <path d="M7 10v7M7 7v.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M11 17v-4a2 2 0 014 0v4M11 10v7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+        <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" strokeWidth="1.6"/>
+        <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.6"/>
+        <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
       </svg>
     ),
   },

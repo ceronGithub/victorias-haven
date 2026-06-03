@@ -11,7 +11,7 @@ import { useState } from 'react';
 import './BookingWidget.css';
 
 /* Forbidden characters per Rule 18 */
-const FORBIDDEN = /[<>{}[\]/\\;'"` =\-\-]/g;
+const FORBIDDEN = /[<>{}[\]/\\;'"=\-\-]/g;
 
 /**
  * sanitizeInput — strips forbidden characters from user text

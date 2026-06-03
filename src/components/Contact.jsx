@@ -12,7 +12,7 @@ import { sendContactEmail } from '../lib/emailjs';
 import './Contact.css';
 
 /* ── Rule 18.1 — Forbidden character sanitizer ── */
-const FORBIDDEN_CHARS = /[<>{}[\]/\\;'"` =\-\-]/g;
+const FORBIDDEN_CHARS = /[<>{}[\]/\\;'"=\-\-]/g;
 
 function sanitizeInput(value) {
   return value.replace(FORBIDDEN_CHARS, '');
@@ -112,7 +112,7 @@ export default function Contact() {
     }
     setIsSubmitting(true);
     try {
-      await sendContactEmail(formData);
+      await sendContactEmail({ fromName: formData.fullName, fromEmail: formData.email, phone: formData.phone, message: formData.message });
       setIsSubmitted(true);
       setFormData(INITIAL_FORM_STATE);
     } catch {
