@@ -1,0 +1,159 @@
+/* ============================================================
+   FAQ.css — Section 12: Frequently Asked Questions
+   ============================================================ */
+
+.faqSection {
+  padding: var(--section-pad) 2.5rem;
+  background: var(--color-cream-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle decorative background */
+.faqSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  opacity: 0.5;
+}
+
+.faqSectionInner {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+/* ── Section Header ── */
+.faqSectionHeader {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.faqSectionHeader .sectionSubtitle {
+  text-align: center;
+}
+
+/* ── Accordion List ── */
+.faqList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: var(--border-subtle);
+  border-radius: 2px;
+  background: var(--color-white);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+/* ── Single FAQ Item ── */
+.faqItem {
+  border-bottom: var(--border-subtle);
+  transition: background var(--transition-base);
+}
+
+.faqItem:last-child {
+  border-bottom: none;
+}
+
+.faqItem.faqItemOpen {
+  background: rgba(212,165,116,0.04);
+}
+
+/* ── Question Button ── */
+.faqQuestion {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--transition-base);
+}
+
+.faqQuestion:hover {
+  background: rgba(26,47,79,0.03);
+}
+
+.faqItemOpen .faqQuestion {
+  background: transparent;
+}
+
+.faqQuestionText {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  line-height: 1.5;
+  flex: 1;
+}
+
+.faqItemOpen .faqQuestionText {
+  color: var(--color-gold);
+}
+
+/* ── Toggle Icon ── */
+.faqToggleIcon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  transition: transform var(--transition-base), color var(--transition-base);
+  border-radius: 50%;
+  background: rgba(26,47,79,0.05);
+}
+
+.faqItemOpen .faqToggleIcon {
+  transform: rotate(180deg);
+  color: var(--color-gold);
+  background: rgba(212,165,116,0.12);
+}
+
+/* ── Collapsible Answer ── */
+.faqAnswerWrapper {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faqAnswer {
+  padding: 0 2rem 1.75rem;
+}
+
+.faqAnswer p {
+  font-family: var(--font-body);
+  font-size: 0.975rem;
+  color: var(--color-navy);
+  line-height: 1.8;
+  opacity: 0.8;
+  border-left: 2px solid var(--color-gold);
+  padding-left: 1.25rem;
+}
+
+/* ── Bottom CTA ── */
+.faqCta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  padding-top: 0.5rem;
+}
+
+.faqCtaText {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}

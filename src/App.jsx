@@ -15,6 +15,10 @@ import Services      from './components/Services';
 import Amenities     from './components/Amenities';
 import Testimonials  from './components/Testimonials';
 import Gallery       from './components/Gallery';
+import Location      from './components/Location';
+import FAQ           from './components/FAQ';
+import Contact       from './components/Contact';
+import Footer        from './components/Footer';
 
 import './styles/main.css';
 import './styles/mediaQueries.css';
@@ -36,7 +40,12 @@ export default function App() {
         <Amenities />
         <Testimonials />
         <Gallery />
+        <Location />
+        <FAQ />
+        <Contact />
       </main>
+
+      <Footer />
     </>
   );
 }
