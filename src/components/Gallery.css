@@ -287,3 +287,252 @@
 
 .lightboxNavPrev { left: 1.5rem; }
 .lightboxNavNext { right: 1.5rem; }
+
+/* ============================================================
+   GUESTS CAROUSEL
+   Full-width auto-advancing carousel shown only in Guests tab
+   ============================================================ */
+
+.guestsCarousel {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Stage */
+.guestsCarouselStage {
+  position: relative;
+  width: 100%;
+  height: 560px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.03);
+}
+
+/* Slides */
+.guestsCarouselSlide {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+
+.guestsCarouselSlide--active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+.guestsCarouselSlide--hidden {
+  opacity: 0;
+  transform: scale(1.02);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.guestsCarouselImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Caption bar */
+.guestsCarouselCaption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  background: linear-gradient(to top, rgba(10,14,20,0.80) 0%, transparent 100%);
+  z-index: 2;
+}
+
+.guestsCarouselCaptionText {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(245,241,232,0.85);
+  letter-spacing: 0.04em;
+}
+
+.guestsCarouselCounter {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: rgba(245,241,232,0.45);
+}
+
+.guestsCarouselCounter span {
+  color: var(--color-gold);
+  margin: 0 4px;
+}
+
+/* Arrow buttons */
+.guestsCarouselArrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(245,241,232,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--transition-base), border-color var(--transition-base),
+              color var(--transition-base), transform 0.3s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.guestsCarouselArrow:hover {
+  background: rgba(212,165,116,0.20);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.guestsCarouselArrow--prev { left: 20px; }
+.guestsCarouselArrow--next { right: 20px; }
+
+/* Progress bar */
+.guestsCarouselProgress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255,255,255,0.10);
+  z-index: 4;
+}
+
+.guestsCarouselProgressBar {
+  height: 100%;
+  background: var(--color-gold);
+  animation: carouselProgress 4s linear forwards;
+  transform-origin: left;
+}
+
+@keyframes carouselProgress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* Thumbnail strip */
+.guestsCarouselThumbs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.guestsCarouselThumb {
+  position: relative;
+  width: 100px;
+  height: 68px;
+  border-radius: 3px;
+  overflow: hidden;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+  border: 2px solid transparent;
+  transition: border-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.guestsCarouselThumb--active {
+  border-color: var(--color-gold);
+  opacity: 1;
+  transform: translateY(-3px);
+}
+
+.guestsCarouselThumb:hover:not(.guestsCarouselThumb--active) {
+  opacity: 0.8;
+  border-color: rgba(212,165,116,0.4);
+}
+
+.guestsCarouselThumbImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.guestsCarouselThumbOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10,14,20,0.25);
+  transition: background var(--transition-base);
+}
+
+.guestsCarouselThumb--active .guestsCarouselThumbOverlay {
+  background: transparent;
+}
+
+/* Dot indicators */
+.guestsCarouselDots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.guestsCarouselDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(245,241,232,0.20);
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition-base), transform var(--transition-base);
+}
+
+.guestsCarouselDot--active {
+  background: var(--color-gold);
+  transform: scale(1.35);
+}
+
+.guestsCarouselDot:hover:not(.guestsCarouselDot--active) {
+  background: rgba(245,241,232,0.40);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .guestsCarouselStage {
+    height: 300px;
+  }
+
+  .guestsCarouselThumb {
+    width: 72px;
+    height: 50px;
+  }
+
+  .guestsCarouselArrow {
+    width: 38px;
+    height: 38px;
+  }
+
+  .guestsCarouselArrow--prev { left: 10px; }
+  .guestsCarouselArrow--next { right: 10px; }
+}
+
+@media (max-width: 480px) {
+  .guestsCarouselThumbs {
+    gap: 6px;
+  }
+
+  .guestsCarouselThumb {
+    width: 60px;
+    height: 42px;
+  }
+}
