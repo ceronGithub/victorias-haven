@@ -3,7 +3,7 @@
  * Section 10 — Location & Map.
  * Two-column layout: left side shows address, distances, directions link,
  * and nearby attractions. Right side renders an embedded Google Map iframe.
- * Info column fades in from the left, map zooms in from the right on scroll.
+ * All location data matches the real Victoria's Haven property in Sibulan, Dumaguete.
  */
 
 import { useRef } from 'react';
@@ -13,9 +13,9 @@ import './Location.css';
 const distanceDetails = [
   {
     id: 'airport',
-    label: 'International Airport',
-    distance: '18 km',
-    duration: '25 min',
+    label: 'Sibulan Airport (DGT)',
+    distance: '2 km',
+    duration: '5 min',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M8 32l6-4 4-12 6-4 6 4-4 12 6 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
@@ -26,9 +26,9 @@ const distanceDetails = [
   },
   {
     id: 'city',
-    label: 'City Center',
-    distance: '12 km',
-    duration: '18 min',
+    label: 'Robinsons Place Dumaguete',
+    distance: '5 km',
+    duration: '10 min',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <rect x="10" y="20" width="10" height="20" stroke="currentColor" strokeWidth="1.8"/>
@@ -40,27 +40,26 @@ const distanceDetails = [
     ),
   },
   {
-    id: 'beach',
-    label: 'Beach Town',
-    distance: '6 km',
-    duration: '10 min',
+    id: 'convention',
+    label: 'Negros Convention Center',
+    distance: '4.4 km',
+    duration: '8 min',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M8 34c4-4 8 0 12-4s8 0 12-4 8 0 8 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M8 40c4-4 8 0 12-4s8 0 12-4 8 0 8 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <circle cx="24" cy="14" r="6" stroke="currentColor" strokeWidth="1.8"/>
-        <path d="M24 20v6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <rect x="8" y="16" width="32" height="22" rx="2" stroke="currentColor" strokeWidth="1.8"/>
+        <path d="M16 16v-4h16v4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M14 26h20M14 32h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
       </svg>
     ),
   },
 ];
 
 const nearbyAttractions = [
-  'Coral Bay Marine Sanctuary',
-  'Heritage Old Town District',
-  'Sunset Cliffs Viewpoint',
-  'Tropical Botanical Gardens',
-  'Artisan Market & Night Bazaar',
+  'Casaroro Falls (15.7 km)',
+  'Balinsasayao Twin Lakes (21.8 km)',
+  'Sibulan Plantasia Park',
+  'Dumaguete Boulevard',
+  'Silliman University',
 ];
 
 export default function Location() {
@@ -84,7 +83,7 @@ export default function Location() {
               Location
             </h2>
             <p className="sectionSubtitle" style={{ marginTop: '1rem' }}>
-              Tucked away on a secluded peninsula, yet perfectly connected to everything that matters.
+              Tucked away on the shores of Sibulan, Dumaguete — minutes from the airport and everything the city offers.
             </p>
           </header>
 
@@ -99,9 +98,9 @@ export default function Location() {
             </div>
             <div className="locationAddressText">
               <span className="locationAddressLine">Victoria's Haven Private Resort</span>
-              <span className="locationAddressLine">Peninsula Drive, Coastal Cove</span>
-              <span className="locationAddressLine">Island Province, Philippines</span>
-              <span className="locationCoords">14.5995° N, 120.9842° E</span>
+              <span className="locationAddressLine">1259 National Highway, Tubtobon</span>
+              <span className="locationAddressLine">Sibulan, Negros Oriental, Philippines</span>
+              <span className="locationCoords">9.34463° N, 123.28815° E</span>
             </div>
           </address>
 
@@ -135,7 +134,7 @@ export default function Location() {
 
           {/* Directions CTA */}
           <a
-            href="https://maps.google.com/?q=Victoria%27s+Haven+Resort+Philippines"
+            href="https://maps.google.com/?q=9.34463,123.28815"
             target="_blank"
             rel="noopener noreferrer"
             className="buttonPrimary locationDirectionsBtn"
@@ -154,7 +153,7 @@ export default function Location() {
           <div className="locationMapFrame">
             <iframe
               title="Victoria's Haven location map"
-              src="https://maps.google.com/maps?q=14.5995,120.9842&z=15&output=embed"
+              src="https://maps.google.com/maps?q=9.34463,123.28815&z=16&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}
