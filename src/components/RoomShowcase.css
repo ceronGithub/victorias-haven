@@ -234,3 +234,31 @@
 .roomCardCta:hover .roomCardCtaArrow {
   transform: translateX(4px);
 }
+
+/* ── Both Rooms Note ── */
+.roomsBothNote {
+  margin-top: 4rem;
+  text-align: center;
+  padding: 2.5rem 2rem;
+  background: var(--color-white);
+  border: var(--border-subtle);
+  border-top: 3px solid var(--color-gold);
+  border-radius: 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.roomsBothNoteText {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--color-navy);
+  line-height: 1.7;
+  max-width: 560px;
+}
+
+.roomsBothNoteText strong {
+  color: var(--color-gold);
+  font-weight: 700;
+}

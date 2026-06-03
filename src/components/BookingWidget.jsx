@@ -1,9 +1,10 @@
 /**
  * BookingWidget.jsx
- * Floating booking form below the hero section.
+ * Floating booking widget below the hero section.
  * Fields: check-in date, check-out date, guests (stepper), room type (dropdown).
- * Slides up from bottom with a fade-in entrance animation.
- * Sanitizes all text inputs by stripping forbidden characters.
+ * Guest max is 15 per room, 30 for both rooms.
+ * Room types reflect the actual 2 rooms at Victoria's Haven.
+ * Sanitizes all text inputs by stripping forbidden characters (Rule 18.1).
  */
 
 import { useState } from 'react';
@@ -22,40 +23,53 @@ function sanitizeInput(value) {
 }
 
 const roomTypes = [
-  'Any Room Type',
-  'Oceanfront Suite',
-  'Garden Villa',
-  'Beach Cottage',
-  'Presidential Suite',
-  'Deluxe Double Room',
+  'Select a Room',
+  'Ground Floor Room',
+  'Upper Floor Room',
+  'Both Rooms (Full Resort)',
 ];
+
+/* Returns the max guests allowed based on room type selected */
+function getMaxGuests(roomType) {
+  if (roomType === 'Both Rooms (Full Resort)') return 30;
+  return 15;
+}
 
 export default function BookingWidget() {
   const [formData, setFormData] = useState({
     checkIn:   '',
     checkOut:  '',
     guests:    1,
-    roomType:  'Any Room Type',
+    roomType:  'Select a Room',
   });
+
+  const maxGuests = getMaxGuests(formData.roomType);
 
   /* Update a single field in form state */
   const updateField = (field, value) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormData((prev) => {
+      const updated = { ...prev, [field]: value };
+      /* If room type changed, clamp guest count to new max */
+      if (field === 'roomType') {
+        const newMax = getMaxGuests(value);
+        updated.guests = Math.min(prev.guests, newMax);
+      }
+      return updated;
+    });
   };
 
-  /* Guest stepper — increment/decrement within 1–20 */
+  /* Guest stepper — increment/decrement within 1–max */
   const adjustGuests = (delta) => {
     setFormData((prev) => ({
       ...prev,
-      guests: Math.min(20, Math.max(1, prev.guests + delta)),
+      guests: Math.min(maxGuests, Math.max(1, prev.guests + delta)),
     }));
   };
 
-  /* Form submit handler — availability check placeholder */
+  /* Form submit — redirect to contact section for inquiry */
   const handleCheckAvailability = (e) => {
     e.preventDefault();
-    console.log('Availability check:', formData);
-    /* TODO: wire to real availability API */
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -106,7 +120,9 @@ export default function BookingWidget() {
 
           {/* Guests stepper */}
           <div className="bookingField">
-            <label className="bookingLabel" htmlFor="guestCount">Guests</label>
+            <label className="bookingLabel" htmlFor="guestCount">
+              Guests <span className="bookingGuestMax">(max {maxGuests})</span>
+            </label>
             <div className="bookingGuestStepper">
               <button
                 type="button"
@@ -127,7 +143,7 @@ export default function BookingWidget() {
                 className="stepperBtn"
                 onClick={() => adjustGuests(1)}
                 aria-label="Increase guests"
-                disabled={formData.guests >= 20}
+                disabled={formData.guests >= maxGuests}
               >+</button>
             </div>
           </div>
@@ -147,7 +163,7 @@ export default function BookingWidget() {
             </select>
           </div>
 
-          {/* Submit */}
+          {/* Submit — scrolls to contact */}
           <button type="submit" className="buttonPrimary bookingWidgetSubmit">
             Check Availability
           </button>

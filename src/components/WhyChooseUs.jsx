@@ -1,8 +1,7 @@
 /**
  * WhyChooseUs.jsx
- * Section 4 — Highlights 4 USP cards with inline SVG icons.
- * Cards animate in with staggered fade-up via IntersectionObserver
- * (class "revealFade" + "revealFadeDelayN" from main.css utilities).
+ * Section 4 — 4 USP cards highlighting what makes Victoria's Haven unique.
+ * Private resort, 2 rooms (Ground & Upper), shared amenities, no visitors policy.
  */
 
 import './WhyChooseUs.css';
@@ -10,54 +9,56 @@ import './WhyChooseUs.css';
 const uspCards = [
   {
     id: 'privacy',
-    title: 'Privacy & Exclusivity',
+    title: 'Exclusive Private Resort',
     description:
-      'Nestled on a private peninsula, Victoria\'s Haven offers complete seclusion. Every guest enjoys a dedicated section of beach — no crowds, no compromise.',
+      'Victoria\'s Haven is a fully private resort — booked exclusively for your group. No strangers, no shared spaces with outsiders. Your entire stay is yours alone.',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="24" cy="20" r="8" stroke="currentColor" strokeWidth="1.8"/>
-        <path d="M8 40c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M30 10l4-4M34 14l4-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <rect x="10" y="22" width="28" height="20" rx="3" stroke="currentColor" strokeWidth="1.8"/>
+        <path d="M16 22v-6a8 8 0 0116 0v6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <circle cx="24" cy="32" r="3" stroke="currentColor" strokeWidth="1.8"/>
+        <path d="M24 35v4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
       </svg>
     ),
   },
   {
-    id: 'service',
-    title: 'White-Glove Service',
+    id: 'rooms',
+    title: 'Two 2-Storey Rooms',
     description:
-      'From personal butlers to bespoke dining experiences, our staff-to-guest ratio ensures every request is anticipated before it is even voiced.',
+      'Choose from our Ground Floor Room or Upper Floor Room — each a full 2-storey space comfortably accommodating up to 12 guests, with a maximum of 15 per room.',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M12 32V20a12 12 0 0124 0v12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M8 32h32" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M20 36a4 4 0 008 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <circle cx="24" cy="14" r="2" fill="currentColor"/>
+        <rect x="10" y="8" width="28" height="32" rx="2" stroke="currentColor" strokeWidth="1.8"/>
+        <path d="M10 24h28" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <rect x="18" y="30" width="12" height="10" rx="1" stroke="currentColor" strokeWidth="1.8"/>
+        <rect x="16" y="13" width="7" height="6" rx="1" stroke="currentColor" strokeWidth="1.8"/>
+        <rect x="25" y="13" width="7" height="6" rx="1" stroke="currentColor" strokeWidth="1.8"/>
       </svg>
     ),
   },
   {
-    id: 'nature',
-    title: 'Untouched Nature',
+    id: 'amenities',
+    title: 'Complete Amenities Included',
     description:
-      'Set amidst lush tropical gardens and pristine shoreline, the resort is a living sanctuary — designed to reconnect you with the natural world.',
+      'Pool, BBQ area, karaoke, billiard table, fully equipped kitchen, veranda, kiddie playground, and parking — everything you need for a complete group getaway.',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M24 40V24" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M24 24C24 24 14 20 10 10c6 0 12 4 14 14z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>
-        <path d="M24 24C24 24 34 20 38 10c-6 0-12 4-14 14z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>
-        <path d="M24 30c0 0-7-2-10-8 4 0 8 3 10 8z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>
+        <path d="M8 28c4-4 8 0 12-4s8 0 12-4 8 0 8 0v12H8z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M24 14v6M18 10l6 4 6-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
       </svg>
     ),
   },
   {
-    id: 'wellness',
-    title: 'Holistic Wellness',
+    id: 'group',
+    title: 'Perfect for Groups',
     description:
-      'Our world-class spa integrates ancient healing traditions with modern therapies — offering a complete sanctuary for body, mind, and spirit.',
+      'Ideal for family reunions, barkada trips, team outings, and private celebrations. Book 1 room for up to 15 guests, or both rooms for groups of up to 30.',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M24 8c-8 0-14 6-14 14 0 10 14 20 14 20s14-10 14-20c0-8-6-14-14-14z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>
-        <path d="M24 18v8M20 22h8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <circle cx="16" cy="16" r="6" stroke="currentColor" strokeWidth="1.8"/>
+        <circle cx="32" cy="16" r="6" stroke="currentColor" strokeWidth="1.8"/>
+        <path d="M6 40c0-7 4.477-10 10-10s10 3 10 10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <path d="M28 40c0-7 4.477-10 10-10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
       </svg>
     ),
   },
@@ -78,10 +79,10 @@ export default function WhyChooseUs() {
         <header className="whySectionHeader revealFade">
           <span className="sectionEyebrow">Our Promise</span>
           <h2 className="sectionTitle" id="whyHeading">
-            Why Choose Our Resort
+            Why Choose Victoria's Haven
           </h2>
           <p className="sectionSubtitle">
-            An experience meticulously crafted for those who expect nothing less than extraordinary.
+            A private retreat crafted for groups who want the whole place to themselves.
           </p>
         </header>
 

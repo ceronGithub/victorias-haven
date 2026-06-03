@@ -1,99 +1,98 @@
 /**
  * Gallery.jsx
  * Section 9 — Photo gallery grid with category tabs and lightbox.
- * Categories: All | Rooms | Beach & Pool | Dining | Spa & Wellness | Grounds.
+ * Categories: All | Amenities | Kitchen | Rooms | Pool | Guests.
  * Click any image to open full-screen lightbox with prev/next navigation.
- * Lazy loading on all images.
  */
 
 import { useState, useEffect, useCallback } from 'react';
 import './Gallery.css';
 
-const categories = ['All', 'Rooms', 'Beach & Pool', 'Dining', 'Spa & Wellness', 'Grounds'];
+const categories = ['All', 'Amenities', 'Kitchen', 'Rooms', 'Pool', 'Guests'];
 
 const galleryImages = [
   {
     id: 'g1',
-    src: 'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80&auto=format&fit=crop',
-    alt: 'Oceanfront Suite interior',
+    src: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80&auto=format&fit=crop',
+    alt: 'Ground Floor Room interior',
     category: 'Rooms',
     span: 'wide',
   },
   {
     id: 'g2',
-    src: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=800&q=80&auto=format&fit=crop',
-    alt: 'Garden Villa plunge pool',
+    src: 'https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80&auto=format&fit=crop',
+    alt: 'Upper Floor Room interior',
     category: 'Rooms',
     span: 'normal',
   },
   {
     id: 'g3',
-    src: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80&auto=format&fit=crop',
-    alt: 'Private beach at sunset',
-    category: 'Beach & Pool',
+    src: 'https://images.unsplash.com/photo-1575429198097-0414ec08e8cd?w=800&q=80&auto=format&fit=crop',
+    alt: 'Swimming pool area',
+    category: 'Pool',
     span: 'normal',
   },
   {
     id: 'g4',
     src: 'https://images.unsplash.com/photo-1540541338537-1220059af4dc?w=800&q=80&auto=format&fit=crop',
-    alt: 'Infinity pool overlooking ocean',
-    category: 'Beach & Pool',
+    alt: 'Pool view',
+    category: 'Pool',
     span: 'tall',
   },
   {
     id: 'g5',
-    src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80&auto=format&fit=crop',
-    alt: 'Fine dining table setting',
-    category: 'Dining',
+    src: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80&auto=format&fit=crop',
+    alt: 'Fully equipped kitchen',
+    category: 'Kitchen',
     span: 'normal',
   },
   {
     id: 'g6',
-    src: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80&auto=format&fit=crop',
-    alt: 'Presidential Suite bedroom',
-    category: 'Rooms',
+    src: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80&auto=format&fit=crop',
+    alt: 'Kitchen and dining area',
+    category: 'Kitchen',
     span: 'normal',
   },
   {
     id: 'g7',
-    src: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800&q=80&auto=format&fit=crop',
-    alt: 'Spa treatment room',
-    category: 'Spa & Wellness',
+    src: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80&auto=format&fit=crop',
+    alt: 'Resort veranda',
+    category: 'Amenities',
     span: 'wide',
   },
   {
     id: 'g8',
-    src: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=800&q=80&auto=format&fit=crop',
-    alt: 'Lagoon bungalow at dawn',
-    category: 'Rooms',
+    src: 'https://images.unsplash.com/photo-1529543544282-ea669407fca3?w=800&q=80&auto=format&fit=crop',
+    alt: 'BBQ and outdoor area',
+    category: 'Amenities',
     span: 'normal',
   },
   {
     id: 'g9',
-    src: 'https://images.unsplash.com/photo-1470290378698-263fa7ca60ab?w=800&q=80&auto=format&fit=crop',
-    alt: 'Resort tropical gardens',
-    category: 'Grounds',
+    src: 'https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800&q=80&auto=format&fit=crop',
+    alt: 'Parking area',
+    category: 'Amenities',
     span: 'normal',
   },
   {
     id: 'g10',
-    src: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80&auto=format&fit=crop',
-    alt: 'Beach bar and lounge',
-    category: 'Beach & Pool',
+    src: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=800&q=80&auto=format&fit=crop',
+    alt: 'Guests enjoying the resort',
+    category: 'Guests',
     span: 'normal',
   },
   {
     id: 'g11',
-    src: 'https://images.unsplash.com/photo-1600891964092-4316c288032e?w=800&q=80&auto=format&fit=crop',
-    alt: 'Gourmet breakfast presentation',
-    category: 'Dining',
+    src: 'https://images.unsplash.com/photo-1506784365847-bbad939e9335?w=800&q=80&auto=format&fit=crop',
+    alt: 'Group celebration at the resort',
+    category: 'Guests',
     span: 'tall',
   },
   {
     id: 'g12',
-    src: 'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=800&q=80&auto=format&fit=crop',
-    alt: 'Sunset over resort grounds',
-    category: 'Grounds',
+    src: 'https://images.unsplash.com/photo-1513151233558-d860c5398176?w=800&q=80&auto=format&fit=crop',
+    alt: 'Family gathering at the pool',
+    category: 'Guests',
     span: 'wide',
   },
 ];
@@ -163,7 +162,7 @@ export default function Gallery() {
             Gallery
           </h2>
           <p className="sectionSubtitle" style={{ color: 'rgba(245,241,232,0.55)', margin: '1rem auto 0' }}>
-            A glimpse into the world that awaits you at Victoria's Haven.
+            A glimpse into what's waiting for you and your group at Victoria's Haven.
           </p>
         </header>
 
@@ -226,8 +225,6 @@ export default function Gallery() {
           aria-label={`Lightbox: ${activeLightboxImage.alt}`}
           onClick={closeLightbox}
         >
-          {/* Backdrop handled by div click above */}
-
           <button
             className="lightboxClose"
             onClick={closeLightbox}
@@ -236,12 +233,10 @@ export default function Gallery() {
             ✕
           </button>
 
-          {/* Counter */}
           <div className="lightboxCounter" aria-live="polite">
             {lightboxIndex + 1} / {filteredImages.length}
           </div>
 
-          {/* Image */}
           <div
             className="lightboxImageWrap"
             onClick={(e) => e.stopPropagation()}
@@ -254,7 +249,6 @@ export default function Gallery() {
             <p className="lightboxCaption">{activeLightboxImage.alt}</p>
           </div>
 
-          {/* Prev */}
           <button
             className="lightboxNavBtn lightboxNavPrev"
             onClick={(e) => { e.stopPropagation(); lightboxPrev(); }}
@@ -263,7 +257,6 @@ export default function Gallery() {
             ←
           </button>
 
-          {/* Next */}
           <button
             className="lightboxNavBtn lightboxNavNext"
             onClick={(e) => { e.stopPropagation(); lightboxNext(); }}

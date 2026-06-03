@@ -1,198 +1,114 @@
 /**
  * Amenities.jsx
- * Section 7 — World-class amenities grid.
- * 15 amenity cards arranged in a 5-column grid with SVG icons.
- * Cards scale-up + fade-in on scroll via revealFade utility.
+ * Section 7 — Amenities grid.
+ * Displays the actual amenities available at Victoria's Haven:
+ * Pool, BBQ Area, Karaoke, Billiard, Kitchen, Veranda, Kiddie Playground, Parking.
  */
 
 import './Amenities.css';
 
 const amenities = [
   {
-    id: 'private-beach',
-    name: 'Private Beach Access',
-    description: 'Exclusive shoreline reserved solely for our guests.',
-    icon: (
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M8 36c8-8 16-4 24-8s12-12 12-12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M8 40h32" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <circle cx="36" cy="12" r="5" stroke="currentColor" strokeWidth="1.8"/>
-        <path d="M36 17v6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-      </svg>
-    ),
-  },
-  {
-    id: 'infinity-pool',
-    name: 'Infinity Pool',
-    description: 'Horizon-edge pool merging seamlessly with the ocean.',
+    id: 'pool',
+    name: 'Swimming Pool',
+    description: 'Relax and cool off in our refreshing pool — perfect for the whole group.',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M8 28c4-4 8 0 12-4s8 0 12-4 8 0 8 0v12H8z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M8 36c4-3 8 1 12-3s8 1 12-3 8 1 8 1" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M34 12a5 5 0 00-10 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M29 12v8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <circle cx="30" cy="13" r="4" stroke="currentColor" strokeWidth="1.8"/>
+        <path d="M30 17v5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
       </svg>
     ),
   },
   {
-    id: 'spa',
-    name: 'Spa & Wellness Center',
-    description: 'Full-service spa with ancient and modern therapies.',
+    id: 'bbq',
+    name: 'BBQ Area',
+    description: 'Fire up the grill and enjoy outdoor dining with your group in our dedicated BBQ area.',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M24 10c-6 0-10 4.5-10 10 0 8 10 16 10 16s10-8 10-16c0-5.5-4-10-10-10z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round"/>
-        <path d="M20 20h8M24 16v8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M16 36c0 0 4 2 8 2s8-2 8-2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <path d="M12 22a12 12 0 0024 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <path d="M8 22h32" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <path d="M24 34v8M18 42h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <path d="M18 10c0 0 2-3 2-5M24 10c0 0 2-3 2-5M30 10c0 0 2-3 2-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
       </svg>
     ),
   },
   {
-    id: 'fine-dining',
-    name: 'Fine Dining Restaurant',
-    description: 'Award-winning cuisine by our Executive Chef.',
+    id: 'karaoke',
+    name: 'Karaoke',
+    description: 'Belt out your favorite songs all night long with our karaoke setup — the ultimate group activity.',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M16 8v10a8 8 0 0016 0V8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M24 18v22" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M10 40h28" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M32 8v32" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <circle cx="24" cy="18" r="8" stroke="currentColor" strokeWidth="1.8"/>
+        <path d="M24 26v6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <path d="M16 22c0 0 0 10 8 10s8-10 8-10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <path d="M18 38h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
       </svg>
     ),
   },
   {
-    id: 'room-service',
-    name: '24/7 Room Service',
-    description: 'Round-the-clock dining delivered to your suite.',
+    id: 'billiard',
+    name: 'Billiard Table',
+    description: 'Challenge your friends to a round of billiards in our recreational area.',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="24" cy="26" r="14" stroke="currentColor" strokeWidth="1.8"/>
-        <path d="M10 26h28" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M24 12V8M20 8h8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M24 26V18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M24 26l6 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <rect x="6" y="14" width="36" height="20" rx="3" stroke="currentColor" strokeWidth="1.8"/>
+        <circle cx="16" cy="24" r="4" stroke="currentColor" strokeWidth="1.8"/>
+        <circle cx="32" cy="24" r="4" stroke="currentColor" strokeWidth="1.8"/>
+        <circle cx="24" cy="24" r="2" fill="currentColor"/>
       </svg>
     ),
   },
   {
-    id: 'fitness',
-    name: 'Fitness Center',
-    description: 'State-of-the-art equipment and personal trainers.',
+    id: 'kitchen',
+    name: 'Full Kitchen',
+    description: 'Fully equipped kitchen so you can cook your own meals and make yourselves at home.',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M8 24h4M36 24h4M12 24h24" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <rect x="12" y="18" width="6" height="12" rx="3" stroke="currentColor" strokeWidth="1.8"/>
-        <rect x="30" y="18" width="6" height="12" rx="3" stroke="currentColor" strokeWidth="1.8"/>
+        <rect x="8" y="10" width="32" height="28" rx="3" stroke="currentColor" strokeWidth="1.8"/>
+        <path d="M8 22h32" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <circle cx="18" cy="16" r="3" stroke="currentColor" strokeWidth="1.8"/>
+        <circle cx="30" cy="16" r="3" stroke="currentColor" strokeWidth="1.8"/>
+        <rect x="14" y="26" width="20" height="8" rx="2" stroke="currentColor" strokeWidth="1.8"/>
       </svg>
     ),
   },
   {
-    id: 'concierge',
-    name: 'Concierge Service',
-    description: 'Personal concierge for every guest request.',
+    id: 'veranda',
+    name: 'Veranda',
+    description: 'Unwind on the veranda — a great spot for morning coffee, evening conversations, and fresh air.',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="24" cy="16" r="8" stroke="currentColor" strokeWidth="1.8"/>
-        <path d="M8 40c0-8.837 7.163-16 16-16s16 7.163 16 16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-      </svg>
-    ),
-  },
-  {
-    id: 'conference',
-    name: 'Conference Facilities',
-    description: 'Modern meeting spaces for corporate events.',
-    icon: (
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect x="8" y="12" width="32" height="20" rx="2" stroke="currentColor" strokeWidth="1.8"/>
-        <path d="M20 32v6M28 32v6M14 38h20" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M14 22h20M14 17h8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-      </svg>
-    ),
-  },
-  {
-    id: 'kids-club',
-    name: 'Kids Club',
-    description: 'Supervised activities and adventures for children.',
-    icon: (
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="18" cy="14" r="5" stroke="currentColor" strokeWidth="1.8"/>
-        <circle cx="30" cy="14" r="5" stroke="currentColor" strokeWidth="1.8"/>
-        <path d="M10 38c0-5 3-9 8-10M38 38c0-5-3-9-8-10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M18 28c0 0 3 3 6 3s6-3 6-3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-      </svg>
-    ),
-  },
-  {
-    id: 'water-sports',
-    name: 'Water Sports',
-    description: 'Snorkeling, diving, kayaking, and paddleboarding.',
-    icon: (
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M8 30c4-6 8-2 12-6s8-2 12-6l8 12H8z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M8 38c4-3 8 1 12-3s8 1 12-3 8 0 8 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-      </svg>
-    ),
-  },
-  {
-    id: 'beach-lounge',
-    name: 'Beach Lounge',
-    description: 'Private sun beds and shaded cabanas by the shore.',
-    icon: (
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M10 26h28" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M14 26V32M34 26v6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M10 26l4-10h20l4 10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M8 20h32" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <path d="M6 20l6-10h24l6 10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M12 20v18M36 20v18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
         <path d="M8 38h32" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M24 16V8M20 10l4-2 4 2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M18 28h12M18 33h12" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
       </svg>
     ),
   },
   {
-    id: 'library',
-    name: 'Library & Reading Room',
-    description: 'A curated collection of literature in a serene setting.',
+    id: 'playground',
+    name: 'Kiddie Playground',
+    description: 'A safe and fun playground area so the little ones can play while adults relax.',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect x="10" y="10" width="8" height="28" rx="2" stroke="currentColor" strokeWidth="1.8"/>
-        <rect x="20" y="14" width="8" height="24" rx="2" stroke="currentColor" strokeWidth="1.8"/>
-        <rect x="30" y="10" width="8" height="28" rx="2" stroke="currentColor" strokeWidth="1.8"/>
-        <path d="M8 38h32" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-      </svg>
-    ),
-  },
-  {
-    id: 'game-room',
-    name: 'Game Room',
-    description: 'Evening entertainment with billiards, chess, and more.',
-    icon: (
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <rect x="8" y="16" width="32" height="20" rx="4" stroke="currentColor" strokeWidth="1.8"/>
-        <path d="M18 22v8M14 26h8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <circle cx="32" cy="24" r="2" fill="currentColor"/>
-        <circle cx="32" cy="30" r="2" fill="currentColor"/>
+        <path d="M10 38V20M38 38V20" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <path d="M10 20l14-10 14 10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M18 38V28h12v10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="24" cy="24" r="3" stroke="currentColor" strokeWidth="1.8"/>
       </svg>
     ),
   },
   {
     id: 'parking',
-    name: 'Secure Parking',
-    description: 'Complimentary valet and secure parking facilities.',
+    name: 'Parking Area',
+    description: 'Spacious parking area available on-site for all your vehicles.',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <rect x="8" y="12" width="32" height="26" rx="3" stroke="currentColor" strokeWidth="1.8"/>
         <path d="M18 26h4a5 5 0 000-10h-4v16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-  },
-  {
-    id: 'wifi',
-    name: 'High-Speed Wi-Fi',
-    description: 'Complimentary fibre-speed internet throughout the resort.',
-    icon: (
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M8 22c8.837-8.837 23.163-8.837 32 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M13 27c5.523-5.523 16.477-5.523 22 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M18 32c2.761-2.761 9.239-2.761 12 0" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <circle cx="24" cy="38" r="2.5" fill="currentColor"/>
       </svg>
     ),
   },
@@ -207,10 +123,10 @@ export default function Amenities() {
         <header className="amenitiesSectionHeader revealFade">
           <span className="sectionEyebrow">Facilities</span>
           <h2 className="sectionTitle" id="amenitiesHeading">
-            World-Class Amenities
+            What's Included
           </h2>
           <p className="sectionSubtitle" style={{ margin: '1rem auto 0' }}>
-            Every facility has been thoughtfully designed to elevate your stay beyond expectation.
+            Everything you need for a complete group getaway — all within the resort.
           </p>
         </header>
 

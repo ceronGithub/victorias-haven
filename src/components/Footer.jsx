@@ -27,12 +27,12 @@ const quickLinks = [
 ];
 
 const serviceLinks = [
-  { label: 'Spa & Wellness',   href: '#services' },
-  { label: 'Events & Weddings', href: '#services' },
-  { label: 'Room Service',     href: '#services' },
-  { label: 'Concierge',        href: '#services' },
-  { label: 'Water Sports',     href: '#services' },
-  { label: 'Airport Transfers', href: '#services' },
+  { label: 'Ground Floor Room', href: '#rooms' },
+  { label: 'Upper Floor Room',  href: '#rooms' },
+  { label: 'Full Resort Booking', href: '#rooms' },
+  { label: 'Swimming Pool',     href: '#amenities' },
+  { label: 'BBQ & Karaoke',     href: '#amenities' },
+  { label: 'Packages',          href: '#services' },
 ];
 
 const legalLinks = [

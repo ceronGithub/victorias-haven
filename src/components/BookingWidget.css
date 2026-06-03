@@ -165,3 +165,11 @@
     transform: translateY(0);
   }
 }
+
+/* Guest max label */
+.bookingGuestMax {
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  margin-left: 0.25rem;
+}
