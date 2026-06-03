@@ -3,7 +3,8 @@
  * Section 10 — Location & Map.
  * Two-column layout: left side shows address, distances, directions link,
  * and nearby attractions. Right side renders an embedded Google Map iframe.
- * All location data matches the real Victoria's Haven property in Sibulan, Dumaguete.
+ * All location data matches the real Victoria's Haven Green Breeze property
+ * in Langkaan, Dasmariñas City, Cavite.
  */
 
 import { useRef } from 'react';
@@ -12,23 +13,10 @@ import './Location.css';
 
 const distanceDetails = [
   {
-    id: 'airport',
-    label: 'Sibulan Airport (DGT)',
-    distance: '2 km',
-    duration: '5 min',
-    icon: (
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M8 32l6-4 4-12 6-4 6 4-4 12 6 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M6 38h36" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-        <path d="M28 20l8-4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
-      </svg>
-    ),
-  },
-  {
-    id: 'city',
-    label: 'Robinsons Place Dumaguete',
-    distance: '5 km',
-    duration: '10 min',
+    id: 'robinsons',
+    label: 'Robinsons Place Dasmariñas',
+    distance: '3.5 km',
+    duration: '8 min',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <rect x="10" y="20" width="10" height="20" stroke="currentColor" strokeWidth="1.8"/>
@@ -40,10 +28,23 @@ const distanceDetails = [
     ),
   },
   {
-    id: 'convention',
-    label: 'Negros Convention Center',
-    distance: '4.4 km',
-    duration: '8 min',
+    id: 'highway',
+    label: 'Emilio Aguinaldo Highway',
+    distance: '1.2 km',
+    duration: '3 min',
+    icon: (
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M10 38l4-28h20l4 28" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M18 38l2-28M30 38l-2-28" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+        <path d="M16 22h16M15 30h18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/>
+      </svg>
+    ),
+  },
+  {
+    id: 'manila',
+    label: 'Manila (via SLEX)',
+    distance: '35 km',
+    duration: '45 min',
     icon: (
       <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <rect x="8" y="16" width="32" height="22" rx="2" stroke="currentColor" strokeWidth="1.8"/>
@@ -55,11 +56,11 @@ const distanceDetails = [
 ];
 
 const nearbyAttractions = [
-  'Casaroro Falls (15.7 km)',
-  'Balinsasayao Twin Lakes (21.8 km)',
-  'Sibulan Plantasia Park',
-  'Dumaguete Boulevard',
-  'Silliman University',
+  'SM City Dasmariñas',
+  'De La Salle University – Dasmariñas',
+  'Cavite State University',
+  'Governors Drive Commercial Strip',
+  'Dasmariñas City Hall',
 ];
 
 export default function Location() {
@@ -83,7 +84,7 @@ export default function Location() {
               Location
             </h2>
             <p className="sectionSubtitle" style={{ marginTop: '1rem' }}>
-              Tucked away on the shores of Sibulan, Dumaguete — minutes from the airport and everything the city offers.
+              Nestled in the heart of Green Breeze, Dasmariñas City — easily accessible from Manila via SLEX and surrounded by the best of Cavite.
             </p>
           </header>
 
@@ -97,10 +98,10 @@ export default function Location() {
               </svg>
             </div>
             <div className="locationAddressText">
-              <span className="locationAddressLine">Victoria's Haven Private Resort</span>
-              <span className="locationAddressLine">1259 National Highway, Tubtobon</span>
-              <span className="locationAddressLine">Sibulan, Negros Oriental, Philippines</span>
-              <span className="locationCoords">9.34463° N, 123.28815° E</span>
+              <span className="locationAddressLine">Victoria's Haven Green Breeze</span>
+              <span className="locationAddressLine">Green Breeze, Langkaan</span>
+              <span className="locationAddressLine">Dasmariñas City, Cavite, Philippines</span>
+              <span className="locationCoords">14.2673208° N, 120.9206383° E</span>
             </div>
           </address>
 
@@ -134,11 +135,11 @@ export default function Location() {
 
           {/* Directions CTA */}
           <a
-            href="https://maps.google.com/?q=9.34463,123.28815"
+            href="https://www.google.com/maps/place/Victoria's+Haven+Green+Breeze/@14.2673208,120.9180634,17z/data=!3m1!4b1!4m6!3m5!1s0x33bd7f00434e56f1:0xe62a403e2022c531!8m2!3d14.2673208!4d120.9206383!16s%2Fg%2F11yfg_r1fj"
             target="_blank"
             rel="noopener noreferrer"
             className="buttonPrimary locationDirectionsBtn"
-            aria-label="Get directions to Victoria's Haven on Google Maps (opens in new tab)"
+            aria-label="Get directions to Victoria's Haven Green Breeze on Google Maps (opens in new tab)"
           >
             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16" aria-hidden="true">
               <path d="M12 2L8 9h3v4H7l5 9 5-9h-4V9h3L12 2z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/>
@@ -152,8 +153,8 @@ export default function Location() {
         <div className="locationMapWrapper revealFade revealFadeDelay2">
           <div className="locationMapFrame">
             <iframe
-              title="Victoria's Haven location map"
-              src="https://maps.google.com/maps?q=9.34463,123.28815&z=16&output=embed"
+              title="Victoria's Haven Green Breeze location map"
+              src="https://maps.google.com/maps?q=14.2673208,120.9206383&z=16&output=embed"
               width="100%"
               height="100%"
               style={{ border: 0 }}
