@@ -1,32 +1,32 @@
-/**
+/*
  * emailjs.js
- * EmailJS helper — sends contact form submissions as emails.
- * Uses the EmailJS browser SDK with credentials from environment variables.
- * Call sendContactEmail() from the Contact form submit handler.
+ * Initializes EmailJS with the public key from environment variables.
+ * Exports sendContactEmail() — call this from the Contact form submit handler.
+ * Template variables sent: from_name, from_email, phone, message.
  */
 
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 
-const EMAILJS_SERVICE_ID  = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-const EMAILJS_PUBLIC_KEY  = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-/**
- * sendContactEmail — sends form data via EmailJS
- * @param {{ fullName: string, email: string, phone: string, inquiryType: string, message: string }} formData
- * @returns {Promise<void>}
+/* Initialize EmailJS once with the public key */
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+/*
+ * sendContactEmail()
+ * Sends an email via EmailJS using the Contact Us template.
+ * Accepts a formData object with: fromName, fromEmail, phone, message.
+ * Returns a Promise — resolves on success, rejects on failure.
  */
-export async function sendContactEmail(formData) {
-  return emailjs.send(
-    EMAILJS_SERVICE_ID,
-    EMAILJS_TEMPLATE_ID,
-    {
-      from_name:    formData.fullName,
-      from_email:   formData.email,
-      phone:        formData.phone,
-      inquiry_type: formData.inquiryType,
-      message:      formData.message,
-    },
-    EMAILJS_PUBLIC_KEY
-  );
+export function sendContactEmail({ fromName, fromEmail, phone, message }) {
+  const templateParams = {
+    from_name: fromName,
+    from_email: fromEmail,
+    phone: phone,
+    message: message,
+  };
+
+  return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
 }
