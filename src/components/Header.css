@@ -1,0 +1,151 @@
+/* ============================================================
+   Header.css — Sticky Navigation Bar
+   ============================================================ */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0;
+  background: transparent;
+  transition: background var(--transition-slow), box-shadow var(--transition-slow);
+  will-change: background;
+}
+
+/* Semi-solid on scroll */
+.headerScrolled {
+  background: rgba(15, 30, 51, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(212,165,116,0.15), 0 4px 24px rgba(0,0,0,0.20);
+}
+
+.headerInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 2.5rem;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+/* ── Logo ── */
+.headerLogo {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.headerLogoMark {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-gold);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.headerLogoText {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--color-cream);
+  letter-spacing: 0.01em;
+}
+
+/* ── Nav Menu ── */
+.headerNavMenu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navLink {
+  position: relative;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(245,241,232,0.80);
+  text-decoration: none;
+  transition: color var(--transition-base);
+  padding-bottom: 4px;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--color-gold);
+  transition: width var(--transition-base);
+}
+
+.navLink:hover {
+  color: var(--color-cream);
+}
+
+.navLink:hover::after {
+  width: 100%;
+}
+
+/* ── Reserve Button (desktop) ── */
+.headerReserveBtn {
+  flex-shrink: 0;
+}
+
+/* ── Hamburger (hidden on desktop, shown via mediaQueries.css) ── */
+.headerHamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  padding: 4px;
+  z-index: 1001;
+}
+
+.hamburgerBar {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--color-cream);
+  border-radius: 2px;
+  transition: transform var(--transition-base), opacity var(--transition-base);
+  transform-origin: center;
+}
+
+/* Hamburger → X transform */
+.hamburgerOpen .hamburgerBar:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.hamburgerOpen .hamburgerBar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburgerOpen .hamburgerBar:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* Mobile close overlay */
+.headerNavMenu.menuOpen {
+  animation: menuFadeIn 0.3s ease forwards;
+}
+
+@keyframes menuFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

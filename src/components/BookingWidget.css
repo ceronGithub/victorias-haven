@@ -1,0 +1,167 @@
+/* ============================================================
+   BookingWidget.css — Booking Form Widget
+   ============================================================ */
+
+.bookingWidget {
+  position: relative;
+  z-index: 10;
+  margin: -3.5rem auto 0;
+  padding: 0 2.5rem;
+  max-width: var(--max-width);
+}
+
+.bookingWidgetInner {
+  background: var(--color-white);
+  border-radius: 4px;
+  box-shadow: var(--shadow-float);
+  padding: 2rem 2.5rem;
+  border-top: 3px solid var(--color-gold);
+
+  /* Entrance animation */
+  animation: widgetSlideUp 0.9s cubic-bezier(0.22,1,0.36,1) 1.1s both;
+}
+
+.bookingWidgetTitle {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  letter-spacing: 0.01em;
+}
+
+.bookingWidgetTitleIcon {
+  font-size: 0.55rem;
+  color: var(--color-gold);
+}
+
+/* ── Form Grid ── */
+.bookingWidgetForm {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr auto;
+  gap: 1.25rem;
+  align-items: end;
+}
+
+/* ── Field ── */
+.bookingField {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bookingLabel {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.bookingInput,
+.bookingSelect {
+  width: 100%;
+  padding: 0.75rem 0.875rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--color-navy);
+  background: var(--color-cream);
+  border: 1px solid var(--color-cream-dark);
+  border-radius: 2px;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  cursor: pointer;
+}
+
+.bookingInput:focus,
+.bookingSelect:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(212,165,116,0.18);
+}
+
+/* Dropdown arrow */
+.bookingSelect {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231a2f4f' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.875rem center;
+  padding-right: 2.25rem;
+}
+
+/* ── Guest Stepper ── */
+.bookingGuestStepper {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid var(--color-cream-dark);
+  border-radius: 2px;
+  background: var(--color-cream);
+  overflow: hidden;
+  transition: border-color var(--transition-base);
+}
+
+.bookingGuestStepper:focus-within {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(212,165,116,0.18);
+}
+
+.stepperBtn {
+  width: 36px;
+  height: 42px;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: var(--color-navy);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transition-base), color var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stepperBtn:hover:not(:disabled) {
+  background: var(--color-gold);
+  color: var(--color-navy);
+}
+
+.stepperBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.stepperValue {
+  flex: 1;
+  text-align: center;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-navy);
+  min-width: 2rem;
+}
+
+/* ── Submit ── */
+.bookingWidgetSubmit {
+  white-space: nowrap;
+  height: 42px;
+  padding: 0 1.75rem;
+}
+
+/* ── Entrance Animation ── */
+@keyframes widgetSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

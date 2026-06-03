@@ -1,0 +1,157 @@
+/* ============================================================
+   Hero.css — Full-Screen Hero Section
+   ============================================================ */
+
+.heroSection {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ── Parallax Background ── */
+.heroBackground {
+  position: absolute;
+  inset: -15%;
+  background-image: url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1920&q=85&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  will-change: transform;
+  z-index: 0;
+}
+
+/* ── Gradient Overlay ── */
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    165deg,
+    rgba(15, 30, 51, 0.55) 0%,
+    rgba(26, 47, 79, 0.35) 50%,
+    rgba(15, 30, 51, 0.70) 100%
+  );
+  z-index: 1;
+}
+
+/* ── Content ── */
+.heroContent {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 2rem;
+  max-width: 820px;
+}
+
+/* Eyebrow */
+.heroEyebrow {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: heroFadeUp 0.8s cubic-bezier(0.22,1,0.36,1) 0.3s forwards;
+}
+
+/* Headline */
+.heroHeadline {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 700;
+  color: var(--color-cream);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.25rem;
+  opacity: 0;
+  animation: heroFadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.5s forwards;
+}
+
+.heroHeadlineAccent {
+  font-style: italic;
+  color: var(--color-gold);
+  font-weight: 400;
+}
+
+/* Subheadline */
+.heroSubheadline {
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  font-weight: 300;
+  color: rgba(245,241,232,0.75);
+  letter-spacing: 0.12em;
+  margin-bottom: 2.75rem;
+  opacity: 0;
+  animation: heroFadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.7s forwards;
+}
+
+/* ── CTA Group ── */
+.heroCtaGroup {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: heroFadeUp 0.9s cubic-bezier(0.22,1,0.36,1) 0.9s forwards;
+}
+
+/* ── Scroll Hint ── */
+.heroScrollHint {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: heroFadeIn 1s ease 1.4s forwards;
+}
+
+.heroScrollLabel {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(245,241,232,0.50);
+}
+
+.heroScrollLine {
+  display: block;
+  width: 1px;
+  height: 48px;
+  background: linear-gradient(to bottom, rgba(212,165,116,0.70), transparent);
+  animation: scrollPulse 2.2s ease-in-out infinite;
+}
+
+/* ── Keyframes ── */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50%       { opacity: 1;   transform: scaleY(1.15); }
+}

@@ -1,0 +1,154 @@
+/* ============================================================
+   MEDIA QUERIES — Victoria's Haven
+   All responsive breakpoints live here exclusively.
+   Desktop: 1200px+ | Tablet: 768px–1199px | Mobile: <768px
+   ============================================================ */
+
+/* ── HEADER ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .headerNavMenu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--color-navy-deep);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    z-index: 999;
+  }
+
+  .headerNavMenu.menuOpen {
+    display: flex;
+  }
+
+  .headerNavMenu .navLink {
+    font-size: 1.5rem;
+    color: var(--color-cream);
+  }
+
+  .headerNavMenu .navLink::after {
+    background: var(--color-gold);
+  }
+
+  .headerHamburger {
+    display: flex;
+  }
+
+  .headerReserveBtn {
+    display: none;
+  }
+
+  .headerMobileReserve {
+    display: inline-flex !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .headerInner {
+    padding: 0 1.25rem;
+  }
+
+  .headerLogo {
+    font-size: 1.1rem;
+  }
+}
+
+/* ── HERO ────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .heroHeadline {
+    font-size: clamp(2.25rem, 10vw, 3rem);
+  }
+
+  .heroSubheadline {
+    font-size: 1rem;
+  }
+
+  .heroCtaGroup {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.875rem;
+  }
+
+  .heroScrollHint {
+    bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroContent {
+    padding: 0 1.25rem;
+  }
+}
+
+/* ── BOOKING WIDGET ─────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .bookingWidgetForm {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .bookingWidgetSubmit {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .bookingWidget {
+    margin: -2rem 1rem 0;
+    border-radius: 4px;
+  }
+
+  .bookingWidgetForm {
+    grid-template-columns: 1fr;
+  }
+
+  .bookingWidgetTitle {
+    font-size: 1.1rem;
+  }
+}
+
+/* ── WHY CHOOSE US ──────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .whyGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .whyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .whySection {
+    padding: var(--section-pad) 1.25rem;
+  }
+
+  .whySectionHeader {
+    margin-bottom: 2.5rem;
+  }
+}
+
+/* ── ROOMS ───────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .roomsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .roomsGrid {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+    margin-inline: auto;
+  }
+
+  .roomsSection {
+    padding: var(--section-pad) 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .roomCard {
+    max-width: 100%;
+  }
+}

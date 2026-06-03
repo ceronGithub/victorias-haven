@@ -1,0 +1,236 @@
+/* ============================================================
+   RoomShowcase.css — Section 5: Room Cards
+   ============================================================ */
+
+.roomsSection {
+  background: var(--color-navy);
+  padding: var(--section-pad) 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle background texture */
+.roomsSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(123,168,168,0.06) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 20%, rgba(212,165,116,0.04) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.roomsSectionInner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+/* ── Section Header ── */
+.roomsSectionHeader {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.roomsSectionHeader .sectionTitle {
+  color: var(--color-cream);
+}
+
+.roomsSectionHeader .sectionSubtitle {
+  color: rgba(245,241,232,0.55);
+  margin: 1rem auto 0;
+}
+
+/* ── Grid ── */
+.roomsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+/* ── Room Card ── */
+.roomCard {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow), border-color var(--transition-base);
+  will-change: transform;
+}
+
+.roomCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.40);
+  border-color: rgba(212,165,116,0.30);
+}
+
+/* ── Image ── */
+.roomCardImageWrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.roomCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
+  will-change: transform;
+}
+
+.roomCard:hover .roomCardImage {
+  transform: scale(1.06);
+}
+
+.roomCardImageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(15,30,51,0.70) 0%,
+    transparent 50%
+  );
+}
+
+/* Price badge */
+.roomCardPrice {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  background: rgba(15,30,51,0.80);
+  backdrop-filter: blur(8px);
+  padding: 0.35rem 0.75rem;
+  border-radius: 2px;
+  border: var(--border-gold);
+}
+
+.roomCardPriceFrom {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245,241,232,0.55);
+}
+
+.roomCardPriceAmount {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-gold);
+}
+
+.roomCardPriceNight {
+  font-size: 0.65rem;
+  color: rgba(245,241,232,0.50);
+}
+
+/* ── Content ── */
+.roomCardContent {
+  padding: 1.5rem 1.5rem 1.75rem;
+}
+
+/* Stars */
+.roomCardMeta {
+  margin-bottom: 0.5rem;
+}
+
+.roomCardStars {
+  display: flex;
+  gap: 2px;
+}
+
+.roomCardStar {
+  font-size: 0.8rem;
+}
+
+.starFilled {
+  color: var(--color-gold);
+}
+
+.starEmpty {
+  color: rgba(245,241,232,0.20);
+}
+
+/* Room name */
+.roomCardName {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-cream);
+  margin-bottom: 0.6rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+/* Description */
+.roomCardDescription {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: rgba(245,241,232,0.55);
+  line-height: 1.7;
+  margin-bottom: 1.25rem;
+}
+
+/* Amenities list */
+.roomCardAmenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.roomCardAmenityItem {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(245,241,232,0.60);
+  letter-spacing: 0.03em;
+}
+
+.roomCardAmenityDot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: var(--color-teal);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* CTA */
+.roomCardCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  border-bottom: 1px solid rgba(212,165,116,0.35);
+  padding-bottom: 2px;
+  transition: color var(--transition-base), border-color var(--transition-base), gap var(--transition-base);
+}
+
+.roomCardCta:hover {
+  color: var(--color-gold-light);
+  border-color: var(--color-gold-light);
+  gap: 0.75rem;
+}
+
+.roomCardCtaArrow {
+  font-size: 1rem;
+  transition: transform var(--transition-base);
+}
+
+.roomCardCta:hover .roomCardCtaArrow {
+  transform: translateX(4px);
+}
