@@ -368,50 +368,60 @@
 
 /* ── CALENDAR CAROUSEL ───────────────────────────────────── */
 @media (max-width: 1024px) {
-  .calCarousel {
-    gap: 1rem;
+  .calTrackSlot {
+    padding: 0 0.5rem;
   }
 }
 
 @media (max-width: 768px) {
-  /* Show only the active card; side cards peek in */
-  .calCarousel {
-    grid-template-columns: 0.18fr 1fr 0.18fr;
-    gap: 0.6rem;
+  /* On mobile: show 1 full card + slight peek of neighbours */
+  .calTrack {
+    /* Override inline — 1 card = 80% viewport, centered */
   }
 
-  .calCard:not(.calCardActive) {
-    padding: 1rem 0.4rem;
-    overflow: hidden;
+  .calTrackSlot {
+    flex: 0 0 80%;
+    padding: 0 0.5rem;
   }
 
-  .calCard:not(.calCardActive) .calDayLabels,
-  .calCard:not(.calCardActive) .calGrid,
-  .calCard:not(.calCardActive) .calCardYear {
-    display: none;
-  }
-
-  .calCard:not(.calCardActive) .calCardMonth {
-    font-size: 0.7rem;
-    writing-mode: vertical-lr;
-    text-orientation: mixed;
-    transform: rotate(180deg);
-    text-align: center;
-    margin: auto;
-  }
+  /* Re-center: start at -80% so index-2 (center card) is visible */
+  /* Handled in JSX via inline style override below */
 
   .calSection {
-    padding: var(--section-pad) 1.25rem;
+    padding: var(--section-pad) 0;
+  }
+
+  .calInner {
+    padding: 0 1rem;
+    gap: 2rem;
+  }
+
+  .calDots {
+    gap: 0.3rem;
+  }
+
+  .calDot {
+    width: 5px;
+    height: 5px;
+  }
+
+  .calDot.calDotActive {
+    width: 14px;
   }
 }
 
 @media (max-width: 480px) {
-  .calCell {
-    height: 1.75rem;
-    font-size: 0.72rem;
+  .calTrackSlot {
+    flex: 0 0 90%;
+    padding: 0 0.375rem;
   }
 
-  .calCardHeader {
-    margin-bottom: 0.875rem;
+  .calCell {
+    font-size: 0.7rem;
+    min-height: 1.65rem;
+  }
+
+  .calCardActive .calCardMonth {
+    font-size: 1.2rem;
   }
 }
