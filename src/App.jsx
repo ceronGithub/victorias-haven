@@ -8,7 +8,6 @@
 import { useScrollReveal } from './hooks/useScrollReveal';
 import Header        from './components/Header';
 import Hero          from './components/Hero';
-import BookingWidget from './components/BookingWidget';
 import CalendarCarousel from './components/CalendarCarousel';
 import WhyChooseUs   from './components/WhyChooseUs';
 import RoomShowcase  from './components/RoomShowcase';
@@ -35,7 +34,6 @@ export default function App() {
 
       <main id="mainContent">
         <Hero />
-        <BookingWidget />
         <CalendarCarousel />
         <WhyChooseUs />
         <RoomShowcase />

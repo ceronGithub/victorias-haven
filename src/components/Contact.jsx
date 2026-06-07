@@ -30,7 +30,7 @@ const socialLinks = [
   {
     id: 'facebook',
     label: 'Facebook',
-    href: 'https://facebook.com/victoriashaven',
+    href: 'https://www.facebook.com/p/Victorias-Haven-61574857113365/',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" width="20" height="20">
         <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
@@ -303,18 +303,18 @@ export default function Contact() {
                   )}
                 </button>
 
-                {/* Message Directly — opens Facebook page in new tab */}
+                {/* Direct Message — opens Facebook page in new tab */}
                 <a
                   href="https://www.facebook.com/p/Victorias-Haven-61574857113365/"
-                  className="buttonOutline contactMessageDirectlyBtn"
+                  className="contactDirectMessageBtn"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Message us directly on Facebook (opens in new tab)"
+                  aria-label="Direct message us on Facebook (opens in new tab)"
                 >
                   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="16" height="16" aria-hidden="true">
                     <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round"/>
                   </svg>
-                  Message Directly
+                  Direct Message
                 </a>
               </div>
             </form>

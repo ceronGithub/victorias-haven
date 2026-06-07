@@ -1,10 +1,11 @@
 /**
  * CalendarCarousel.jsx
  * Dynamic monthly calendar carousel with smooth CSS transform sliding.
- * - Active slide is always the current month on load.
+ * - Active slide is always the current month on load, positioned in the center.
  * - 12 dot indicators — one per month of the year.
  * - Smooth sliding via translateX on a continuous track.
  * - Today's date highlighted. Touch + keyboard navigation.
+ * - slotPct is measured via ResizeObserver after mount so centering is always accurate.
  */
 
 import { useState, useRef, useEffect, useCallback } from 'react';
@@ -118,21 +119,20 @@ function MonthCard({ year, month, today, isActive }) {
 /* ── Main export ───────────────────────────────────────────────────────── */
 
 export default function CalendarCarousel() {
-  const today     = new Date();
-  const todayYear = today.getFullYear();
+  const today      = new Date();
+  const todayYear  = today.getFullYear();
   const todayMonth = today.getMonth(); // 0-indexed
 
   /*
-   * activeIndex — which month (0–11) in the CURRENT YEAR is active.
+   * activeIndex — which month (0–11) in the current year is active.
    * Initialized to today's month so the carousel always opens on it.
-   * When user navigates to a different year, we track yearOffset too.
    */
-  const [activeIndex, setActiveIndex] = useState(todayMonth);  // 0-11
-  const [yearOffset,  setYearOffset]  = useState(0);           // 0 = current year
+  const [activeIndex, setActiveIndex] = useState(todayMonth);
+  const [yearOffset,  setYearOffset]  = useState(0);
 
-  /* Sliding state — tracks CSS translateX */
-  const [isSliding,  setIsSliding]  = useState(false);
-  const [slideDir,   setSlideDir]   = useState(null); // 'prev' | 'next'
+  /* Sliding state */
+  const [isSliding, setIsSliding] = useState(false);
+  const [slideDir,  setSlideDir]  = useState(null); // 'prev' | 'next'
   const slideTimer = useRef(null);
 
   /* Touch tracking */
@@ -140,16 +140,13 @@ export default function CalendarCarousel() {
 
   useEffect(() => () => clearTimeout(slideTimer.current), []);
 
-  /* Absolute offset from today's month (for "back to today" check) */
+  /* Absolute offset from today's month */
   const totalOffset = yearOffset * 12 + (activeIndex - todayMonth);
   const isAtToday   = totalOffset === 0;
-
-  /* Active year */
-  const activeYear = todayYear + yearOffset;
+  const activeYear  = todayYear + yearOffset;
 
   /**
-   * goTo — navigate to a specific month index + year direction.
-   * dir: 'prev' slides right, 'next' slides left.
+   * navigate — move to previous or next month with a slide animation.
    */
   const navigate = useCallback((dir) => {
     if (isSliding) return;
@@ -186,7 +183,7 @@ export default function CalendarCarousel() {
     }, 420);
   }, [isSliding, activeIndex]);
 
-  /* Keyboard */
+  /* Keyboard navigation */
   const handleKeyDown = useCallback((e) => {
     if (e.key === 'ArrowLeft')  navigate('prev');
     if (e.key === 'ArrowRight') navigate('next');
@@ -202,10 +199,8 @@ export default function CalendarCarousel() {
     navigate(delta < 0 ? 'next' : 'prev');
   };
 
-  /* Build 5 cards: [active-2, active-1, active, active+1, active+2]
-     Track is offset so center card is always visible.
-     We render 5 to pre-buffer neighbours during the slide. */
-  const base = { year: activeYear, month: activeIndex };
+  /* Build 5 cards: [active-2, active-1, active, active+1, active+2] */
+  const base  = { year: activeYear, month: activeIndex };
   const cards = [-2, -1, 0, 1, 2].map(delta => ({
     ...offsetMonth(base, delta),
     delta,
@@ -213,25 +208,41 @@ export default function CalendarCarousel() {
 
   const viewportRef = useRef(null);
 
-  /**
-   * getSlotPct — returns the slot width as a % of the viewport width.
-   * Reads from the first .calTrackSlot if available, else defaults to 33.333.
+  /*
+   * slotPct — each slot's width as a percentage of the viewport width.
+   * Must be measured after mount (not during render) so the DOM has painted.
+   * ResizeObserver keeps it accurate when the window resizes.
+   * Default 33.333 matches the CSS flex: 0 0 33.333% rule.
    */
-  function getSlotPct() {
-    if (!viewportRef.current) return 33.333;
-    const slot = viewportRef.current.querySelector('.calTrackSlot');
-    if (!slot) return 33.333;
-    const vw = viewportRef.current.offsetWidth;
-    if (!vw) return 33.333;
-    return (slot.offsetWidth / vw) * 100;
-  }
+  const [slotPct, setSlotPct] = useState(33.333);
 
-  /* translateX: center card is at index 2, offset = -(2 × slotPct).
-     During slide add/subtract one more slot width. */
-  const slotPct   = getSlotPct();
-  const baseShift = -(2 * slotPct);
+  useEffect(() => {
+    /* Measure the first rendered slot and express its width as % of viewport */
+    function measureSlot() {
+      if (!viewportRef.current) return;
+      const slot = viewportRef.current.querySelector('.calTrackSlot');
+      const vw   = viewportRef.current.offsetWidth;
+      if (!slot || !vw) return;
+      setSlotPct((slot.offsetWidth / vw) * 100);
+    }
+
+    measureSlot();
+
+    const resizeObserver = new ResizeObserver(measureSlot);
+    if (viewportRef.current) resizeObserver.observe(viewportRef.current);
+    return () => resizeObserver.disconnect();
+  }, []);
+
+  /*
+   * translateX calculation:
+   * The track holds 5 slots. Center card is at index 2 (delta 0).
+   * To show index 2 in the viewport: shift left by 2 slot widths.
+   * baseShift = -(2 × slotPct)%
+   * During slide: add/subtract one slot width for the animation frame.
+   */
+  const baseShift  = -(2 * slotPct);
   const slideShift = isSliding ? (slideDir === 'next' ? -slotPct : slotPct) : 0;
-  const trackX    = baseShift + slideShift;
+  const trackX     = baseShift + slideShift;
 
   return (
     <section className="calSection revealFade" id="availability" aria-label="Availability Calendar">
@@ -257,7 +268,7 @@ export default function CalendarCarousel() {
           aria-roledescription="carousel"
           aria-label="Monthly calendar"
         >
-          {/* Sliding track — 5 cards; center card (idx 2) is positioned via translateX */}
+          {/* Sliding track — 5 cards; center card (idx 2) positioned via translateX */}
           <div
             className="calTrack"
             style={{
