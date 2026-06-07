@@ -365,3 +365,53 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ── CALENDAR CAROUSEL ───────────────────────────────────── */
+@media (max-width: 1024px) {
+  .calCarousel {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Show only the active card; side cards peek in */
+  .calCarousel {
+    grid-template-columns: 0.18fr 1fr 0.18fr;
+    gap: 0.6rem;
+  }
+
+  .calCard:not(.calCardActive) {
+    padding: 1rem 0.4rem;
+    overflow: hidden;
+  }
+
+  .calCard:not(.calCardActive) .calDayLabels,
+  .calCard:not(.calCardActive) .calGrid,
+  .calCard:not(.calCardActive) .calCardYear {
+    display: none;
+  }
+
+  .calCard:not(.calCardActive) .calCardMonth {
+    font-size: 0.7rem;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    text-align: center;
+    margin: auto;
+  }
+
+  .calSection {
+    padding: var(--section-pad) 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .calCell {
+    height: 1.75rem;
+    font-size: 0.72rem;
+  }
+
+  .calCardHeader {
+    margin-bottom: 0.875rem;
+  }
+}

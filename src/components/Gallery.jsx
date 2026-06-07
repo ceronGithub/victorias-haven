@@ -8,7 +8,7 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react';
 import './Gallery.css';
-import { getR2Url } from '../lib/r2';
+import { getR2Url, fetchR2Urls } from '../lib/r2';
 
 const categories = ['All', 'Amenities', 'Kitchen', 'Rooms', 'Pool', 'Guests'];
 
@@ -251,13 +251,33 @@ export default function Gallery() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [isFiltering, setIsFiltering]       = useState(false);
   const [lightboxIndex, setLightboxIndex]   = useState(null);
+  const [guestImages, setGuestImages]       = useState([]);
+  const [guestsLoading, setGuestsLoading]   = useState(false);
 
   const isGuestsTab = activeCategory === 'Guests';
 
-  /* Filtered image list */
+  /* Fetch guests images dynamically from R2 via /api/r2-list */
+  useEffect(() => {
+    if (activeCategory !== 'Guests' || guestImages.length > 0) return;
+    setGuestsLoading(true);
+    fetchR2Urls('gallery/guests').then((urls) => {
+      const images = urls.map((url, i) => ({
+        id:       `guests-dynamic-${i}`,
+        src:      url,
+        alt:      `Guests at Victoria's Haven ${i + 1}`,
+        category: 'Guests',
+      }));
+      setGuestImages(images);
+      setGuestsLoading(false);
+    });
+  }, [activeCategory, guestImages.length]);
+
+  /* Filtered image list — Guests tab uses dynamic R2 data */
   const filteredImages = activeCategory === 'All'
     ? galleryImages
-    : galleryImages.filter((img) => img.category === activeCategory);
+    : activeCategory === 'Guests'
+      ? guestImages
+      : galleryImages.filter((img) => img.category === activeCategory);
 
   /* Switch category with fade transition */
   const handleCategoryChange = (cat) => {
@@ -332,7 +352,11 @@ export default function Gallery() {
         {/* Content — Carousel for Guests, Grid for everything else */}
         <div className={isFiltering ? 'galleryGridHidden' : 'galleryGridVisible'}>
           {isGuestsTab ? (
-            <GuestsCarousel images={filteredImages} />
+            guestsLoading
+              ? <div className="avSlideLoading" style={{ color: "var(--color-gold)", textAlign: "center", padding: "4rem" }}>Loading photos…</div>
+              : filteredImages.length > 0
+                ? <GuestsCarousel images={filteredImages} />
+                : <div className="avSlideLoading" style={{ color: "rgba(245,241,232,0.4)", textAlign: "center", padding: "4rem" }}>No photos yet.</div>
           ) : (
             <div className="galleryGrid">
               {filteredImages.map((image, index) => (

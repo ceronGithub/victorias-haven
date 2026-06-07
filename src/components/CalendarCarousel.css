@@ -1,0 +1,282 @@
+/* ============================================================
+   CalendarCarousel.css — Dynamic Monthly Calendar Carousel
+   Victoria's Haven — uses project design tokens from main.css
+   ============================================================ */
+
+/* ── Section wrapper ──────────────────────────────────────── */
+.calSection {
+  padding: var(--section-pad) 2.5rem;
+  background: var(--color-navy);
+  overflow: hidden;
+}
+
+.calInner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.75rem;
+}
+
+/* ── Section header ───────────────────────────────────────── */
+.calSectionHeader {
+  text-align: center;
+  max-width: 52ch;
+}
+
+.calSectionTitle {
+  color: var(--color-cream);
+  margin-bottom: 0.875rem;
+}
+
+.calSectionSub {
+  color: rgba(245,241,232,0.62);
+}
+
+/* ── Carousel track ───────────────────────────────────────── */
+.calCarousel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  width: 100%;
+  outline: none;
+  transition: transform 0.34s cubic-bezier(0.22,1,0.36,1), opacity 0.34s ease;
+}
+
+/* Slide left (advance to next month) */
+@keyframes carouselSlideLeft {
+  from { transform: translate3d(0, 0, 0); opacity: 1; }
+  to   { transform: translate3d(-3.5%, 0, 0); opacity: 0.7; }
+}
+
+/* Slide right (go to previous month) */
+@keyframes carouselSlideRight {
+  from { transform: translate3d(0, 0, 0); opacity: 1; }
+  to   { transform: translate3d(3.5%, 0, 0); opacity: 0.7; }
+}
+
+.calCarouselSlideLeft  { animation: carouselSlideLeft  0.34s cubic-bezier(0.22,1,0.36,1) both; }
+.calCarouselSlideRight { animation: carouselSlideRight 0.34s cubic-bezier(0.22,1,0.36,1) both; }
+
+/* ── Month card ───────────────────────────────────────────── */
+.calCard {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(245,241,232,0.08);
+  border-radius: 4px;
+  padding: 1.75rem 1.5rem 2rem;
+  transition: background var(--transition-base), border-color var(--transition-base),
+              transform var(--transition-slow), opacity var(--transition-base);
+  opacity: 0.46;
+  transform: scale(0.96);
+  user-select: none;
+}
+
+/* Active (center) card */
+.calCard.calCardActive {
+  background: var(--color-white);
+  border-color: var(--color-gold);
+  border-width: 2px;
+  opacity: 1;
+  transform: scale(1.03);
+  box-shadow: var(--shadow-float);
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Card header ──────────────────────────────────────────── */
+.calCardHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.calCardMonth {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-cream);
+  letter-spacing: -0.01em;
+}
+
+.calCardActive .calCardMonth {
+  color: var(--color-navy);
+}
+
+.calCardYear {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: rgba(245,241,232,0.45);
+  letter-spacing: 0.06em;
+}
+
+.calCardActive .calCardYear {
+  color: var(--color-text-muted);
+}
+
+/* Gold pip on active card header */
+.calCardActivePip {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* ── Day-of-week labels ───────────────────────────────────── */
+.calDayLabels {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.calDayLabel {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(245,241,232,0.3);
+  text-align: center;
+  padding: 0.2rem 0;
+}
+
+.calCardActive .calDayLabel {
+  color: var(--color-text-muted);
+}
+
+/* ── Date grid ────────────────────────────────────────────── */
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.calCell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.1rem;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 400;
+  color: rgba(245,241,232,0.55);
+  border-radius: 2px;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.calCardActive .calCell {
+  color: var(--color-navy);
+}
+
+.calCellEmpty {
+  pointer-events: none;
+}
+
+.calCellWeekend {
+  color: rgba(245,241,232,0.32);
+}
+
+.calCardActive .calCellWeekend {
+  color: var(--color-teal);
+}
+
+/* Today highlight */
+.calCellToday {
+  background: var(--color-gold);
+  color: var(--color-navy) !important;
+  font-weight: 700;
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(212,165,116,0.55);
+}
+
+/* ── Navigation row ───────────────────────────────────────── */
+.calNavRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.calNavBtn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(245,241,232,0.20);
+  background: rgba(255,255,255,0.06);
+  color: var(--color-cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-base), border-color var(--transition-base),
+              transform var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.calNavBtn:hover:not(:disabled) {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-navy);
+  transform: translateY(-2px);
+}
+
+.calNavBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Dot indicators ───────────────────────────────────────── */
+.calDots {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.calDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(245,241,232,0.22);
+  transition: background var(--transition-base), transform var(--transition-base);
+}
+
+.calDot.calDotActive {
+  background: var(--color-gold);
+  transform: scale(1.35);
+}
+
+/* ── Return-to-today pill ─────────────────────────────────── */
+.calReturnRow {
+  display: flex;
+  justify-content: center;
+}
+
+.calReturnBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.25rem;
+  background: transparent;
+  border: 1px solid rgba(212,165,116,0.4);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  transition: background var(--transition-base), border-color var(--transition-base),
+              color var(--transition-base), transform var(--transition-fast);
+}
+
+.calReturnBtn:hover {
+  background: var(--color-gold);
+  border-color: var(--color-gold);
+  color: var(--color-navy);
+  transform: translateY(-2px);
+}

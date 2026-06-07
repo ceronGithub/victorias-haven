@@ -1,9 +1,9 @@
 developerceron
 github
 vercel
+firebase
 
 victoriashaven
-supabase
 cloudflarer2
 emailjs
 
