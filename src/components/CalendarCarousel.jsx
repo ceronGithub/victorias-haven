@@ -209,21 +209,20 @@ export default function CalendarCarousel() {
   const viewportRef = useRef(null);
 
   /*
-   * slotPct — each slot's width as a percentage of the viewport width.
-   * Must be measured after mount (not during render) so the DOM has painted.
-   * ResizeObserver keeps it accurate when the window resizes.
-   * Default 33.333 matches the CSS flex: 0 0 33.333% rule.
+   * slotPx — each slot's width in pixels, measured after mount.
+   * translateX must use px (not %) because % on the track element is
+   * relative to the TRACK's own width (5× the viewport), not the viewport.
+   * Using px eliminates that 5× multiplier bug entirely.
    */
-  const [slotPct, setSlotPct] = useState(33.333);
+  const [slotPx, setSlotPx] = useState(0);
 
   useEffect(() => {
-    /* Measure the first rendered slot and express its width as % of viewport */
+    /* Measure the first rendered slot in px after DOM paint */
     function measureSlot() {
       if (!viewportRef.current) return;
       const slot = viewportRef.current.querySelector('.calTrackSlot');
-      const vw   = viewportRef.current.offsetWidth;
-      if (!slot || !vw) return;
-      setSlotPct((slot.offsetWidth / vw) * 100);
+      if (!slot) return;
+      setSlotPx(slot.offsetWidth);
     }
 
     measureSlot();
@@ -234,14 +233,13 @@ export default function CalendarCarousel() {
   }, []);
 
   /*
-   * translateX calculation:
-   * The track holds 5 slots. Center card is at index 2 (delta 0).
-   * To show index 2 in the viewport: shift left by 2 slot widths.
-   * baseShift = -(2 × slotPct)%
-   * During slide: add/subtract one slot width for the animation frame.
+   * translateX in px:
+   * Track has 5 slots. Active card is at index 2.
+   * Shift left by 2 slot widths to center it in the viewport.
+   * During slide: add/subtract one slot width for the animation.
    */
-  const baseShift  = -(2 * slotPct);
-  const slideShift = isSliding ? (slideDir === 'next' ? -slotPct : slotPct) : 0;
+  const baseShift  = -(2 * slotPx);
+  const slideShift = isSliding ? (slideDir === 'next' ? -slotPx : slotPx) : 0;
   const trackX     = baseShift + slideShift;
 
   return (
@@ -272,7 +270,7 @@ export default function CalendarCarousel() {
           <div
             className="calTrack"
             style={{
-              transform: `translate3d(${trackX}%, 0, 0)`,
+              transform: `translate3d(${trackX}px, 0, 0)`,
               transition: isSliding
                 ? 'transform 0.42s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
                 : 'none',
