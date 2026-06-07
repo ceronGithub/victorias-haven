@@ -77,11 +77,6 @@ export default function BookingWidget() {
 
       <div className="bookingWidgetInner">
 
-        <p className="bookingWidgetTitle">
-          <span className="bookingWidgetTitleIcon" aria-hidden="true">◆</span>
-          Reserve Your Stay
-        </p>
-
         <form
           className="bookingWidgetForm"
           onSubmit={handleCheckAvailability}

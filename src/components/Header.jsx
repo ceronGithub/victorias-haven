@@ -48,7 +48,7 @@ export default function Header() {
           <span className="headerLogoText">ictoria's Haven</span>
         </a>
 
-        {/* ── Desktop Nav ── */}
+        {/* ── Desktop Nav — flex-1 + justify-content: center keeps it always centered ── */}
         <nav
           className={`headerNavMenu ${menuOpen ? 'menuOpen' : ''}`}
           aria-label="Main navigation"
@@ -63,16 +63,6 @@ export default function Header() {
               {link.label}
             </a>
           ))}
-
-          {/* Mobile-only Reserve button inside menu */}
-          <a
-            href="#booking"
-            className="buttonPrimary headerMobileReserve"
-            style={{ display: 'none' }}
-            onClick={closeMenu}
-          >
-            Reserve
-          </a>
         </nav>
 
         {/* ── Desktop CTA ── */}

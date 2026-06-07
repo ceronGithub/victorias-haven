@@ -60,11 +60,13 @@
   letter-spacing: 0.01em;
 }
 
-/* ── Nav Menu ── */
+/* ── Nav Menu — flex:1 + justify-center keeps it always in the middle ── */
 .headerNavMenu {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 2rem;
+  flex: 1;
 }
 
 .navLink {

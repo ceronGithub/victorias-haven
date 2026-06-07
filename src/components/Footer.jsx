@@ -2,20 +2,11 @@
  * Footer.jsx
  * Section 14 — Site Footer.
  * 4-column layout on desktop: Company info | Quick Links | Services | Legal.
- * Fifth column: Newsletter signup with email input.
- * Bottom bar: copyright, social icons, payment method icons.
+ * Bottom bar: copyright, social icons.
  * All content animates in via revealFade on scroll.
- * Newsletter input sanitizes forbidden characters per Rule 18.1.
  */
 
-import { useState } from 'react';
 import './Footer.css';
-
-/* ── Rule 18.1 — Forbidden character sanitizer ── */
-const FORBIDDEN_CHARS = /[<>{}[\]/\\;'"=\-\-]/g;
-function sanitizeInput(value) {
-  return value.replace(FORBIDDEN_CHARS, '');
-}
 
 const quickLinks = [
   { label: 'Home',       href: '#home' },
@@ -77,40 +68,9 @@ const socialLinks = [
   },
 ];
 
-/* Simple payment method SVG badges */
-const paymentMethods = [
-  { id: 'visa',       label: 'Visa' },
-  { id: 'mastercard', label: 'Mastercard' },
-  { id: 'amex',       label: 'Amex' },
-  { id: 'gcash',      label: 'GCash' },
-];
+/* Simple payment method SVG badges — removed per client request */
 
 export default function Footer() {
-  const [newsletterEmail, setNewsletterEmail]   = useState('');
-  const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
-  const [newsletterError, setNewsletterError]   = useState('');
-
-  /* Newsletter email sanitization and submit */
-  const handleNewsletterChange = (e) => {
-    const raw = e.target.value;
-    const sanitized = sanitizeInput(raw);
-    setNewsletterEmail(sanitized);
-    if (newsletterError) setNewsletterError('');
-  };
-
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    if (!newsletterEmail.trim()) {
-      setNewsletterError('Please enter your email address.');
-      return;
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newsletterEmail)) {
-      setNewsletterError('Please enter a valid email address.');
-      return;
-    }
-    setNewsletterSubmitted(true);
-    setNewsletterEmail('');
-  };
 
   return (
     <footer className="footer" id="footer" role="contentinfo">
@@ -176,56 +136,6 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Column 5 — Newsletter */}
-          <div className="footerColumn footerNewsletterColumn revealFade revealFadeDelay4">
-            <h3 className="footerColumnTitle">Stay Connected</h3>
-            <p className="footerNewsletterText">
-              Subscribe for exclusive offers, seasonal packages, and curated resort updates.
-            </p>
-
-            {newsletterSubmitted ? (
-              <div className="footerNewsletterSuccess" role="status" aria-live="polite">
-                <span className="footerNewsletterSuccessIcon" aria-hidden="true">✓</span>
-                You're on the list. Welcome to Victoria's Haven.
-              </div>
-            ) : (
-              <form
-                className="footerNewsletterForm"
-                onSubmit={handleNewsletterSubmit}
-                noValidate
-                aria-label="Newsletter signup"
-              >
-                <div className="footerNewsletterInputWrapper">
-                  <label htmlFor="footerNewsletterEmail" className="footerNewsletterLabel">
-                    Email address
-                  </label>
-                  <input
-                    type="email"
-                    id="footerNewsletterEmail"
-                    className={`footerNewsletterInput ${newsletterError ? 'footerNewsletterInputError' : ''}`}
-                    value={newsletterEmail}
-                    onChange={handleNewsletterChange}
-                    placeholder="Your email address"
-                    autoComplete="email"
-                    aria-required="true"
-                    aria-describedby={newsletterError ? 'footerNewsletterError' : 'footerNewsletterPrivacy'}
-                  />
-                  {newsletterError && (
-                    <span className="footerNewsletterError" id="footerNewsletterError" role="alert">
-                      {newsletterError}
-                    </span>
-                  )}
-                </div>
-                <button type="submit" className="buttonPrimary footerNewsletterBtn">
-                  Subscribe
-                </button>
-                <p className="footerNewsletterPrivacy" id="footerNewsletterPrivacy">
-                  No spam. Unsubscribe anytime. Your privacy is respected.
-                </p>
-              </form>
-            )}
-          </div>
-
         </div>
       </div>
 
@@ -252,15 +162,6 @@ export default function Footer() {
               >
                 {social.icon}
               </a>
-            ))}
-          </div>
-
-          {/* Payment Methods */}
-          <div className="footerPaymentMethods" aria-label="Accepted payment methods">
-            {paymentMethods.map((method) => (
-              <span key={method.id} className="footerPaymentBadge" aria-label={method.label}>
-                {method.label}
-              </span>
             ))}
           </div>
 

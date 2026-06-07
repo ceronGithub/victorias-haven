@@ -20,6 +20,7 @@ import Location      from './components/Location';
 import FAQ           from './components/FAQ';
 import Contact       from './components/Contact';
 import Footer        from './components/Footer';
+import GuestNotice   from './components/GuestNotice';
 
 import './styles/main.css';
 import './styles/mediaQueries.css';
@@ -48,6 +49,7 @@ export default function App() {
       </main>
 
       <Footer />
+      <GuestNotice />
     </>
   );
 }

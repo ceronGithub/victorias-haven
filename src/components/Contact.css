@@ -127,12 +127,30 @@
   font-weight: 500;
 }
 
+/* ── Submit Row — holds Send Message + Message Directly side by side ── */
+.contactSubmitRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
 /* ── Submit Button ── */
 .contactSubmitBtn {
-  align-self: flex-start;
-  min-width: 180px;
+  min-width: 160px;
   justify-content: center;
   position: relative;
+}
+
+/* ── Message Directly Button ── */
+.contactMessageDirectlyBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 160px;
+  justify-content: center;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .contactSubmitBtn:disabled {
